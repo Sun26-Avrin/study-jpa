@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 // @MappedSuperclass
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-// @DiscriminatorColumn
+@DiscriminatorColumn
 @Getter
 @NoArgsConstructor
 @ToString(callSuper = false)
