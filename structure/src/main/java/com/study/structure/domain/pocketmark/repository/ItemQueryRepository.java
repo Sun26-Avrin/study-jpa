@@ -2,7 +2,9 @@ package com.study.structure.domain.pocketmark.repository;
 
 import java.util.List;
 
+import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.impl.JPAUpdateClause;
 import com.study.structure.domain.pocketmark.Item;
 import com.study.structure.domain.pocketmark.QItem;
 
@@ -22,4 +24,13 @@ public class ItemQueryRepository {
                             .fetch();
                             return items;
     }
+
+    public Long update(){
+        UpdateClause<JPAUpdateClause> builder = queryFactory.update(qItem);
+
+        builder.set(qItem.name, "바꿔땅!");
+        return builder.where(qItem.id.eq(1L)).execute();
+
+    }
+
 }

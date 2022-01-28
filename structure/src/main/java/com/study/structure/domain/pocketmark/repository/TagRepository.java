@@ -1,9 +1,12 @@
-// package com.study.structure.domain.pocketmark.repository;
+package com.study.structure.domain.pocketmark.repository;
 
-// import com.study.structure.domain.pocketmark.Tag;
+import java.util.List;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
+import com.study.structure.domain.pocketmark.Tag;
+import com.study.structure.domain.pocketmark.ItemOnlyDto.IdOnlyRes;
 
-// public interface TagRepository extends JpaRepository<Tag,Long> {
-    
-// }
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TagRepository extends JpaRepository<Tag,Long> {
+    List<IdOnlyRes> findByTag(String tag);
+}

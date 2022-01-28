@@ -18,6 +18,7 @@ import com.study.structure.domain.pocketmark.repository.FolderRepository;
 // import com.study.structure.domain.pocketmark.repository.ItemOnlyRepository;
 import com.study.structure.domain.pocketmark.repository.ItemQueryRepository;
 import com.study.structure.domain.pocketmark.repository.ItemRepository;
+import com.study.structure.domain.pocketmark.repository.TagRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class structureTest {
     @Autowired ItemRepository itemRepository;
     @Autowired FolderRepository folderRepository;
     @Autowired BookmarkRepository bookmarkRepository;
-    // @Autowired TagRepository tagRepository;
+    @Autowired TagRepository tagRepository;
     @Autowired EntityManager em;
     @Autowired ItemQueryRepository itemQueryRepository;
     // @Autowired ItemOnlyRepository itemOnlyRepository;
@@ -102,19 +103,22 @@ public class structureTest {
         em.clear();
         // System.out.println("# Bookmark");
         bookmarkRepository.findAll().forEach(System.out::println);
-        // em.flush();
-        // em.clear();
-        // // System.out.println("# TAG");
-        // // tagRepository.findAll().forEach(System.out::println);
-        // // em.flush();
-        // // em.clear();
-        // System.out.println("# Item");
-        // itemRepository.findAll().forEach(System.out::println);
+        
 
         em.flush(); em.clear();
+        // em.find(Item.class, 1L);
+        em.flush(); em.clear();
+        itemRepository.findByItemId(1L);
+        em.flush(); em.clear();
+        itemQueryRepository.update();
         
-        em.find(Item.class, 1L);
-
+        em.flush(); em.clear();
+        System.out.println(
+             itemRepository.findByItemId(0L).get(0).getName());
+        em.flush(); em.clear();
+        itemRepository.findByItemId(0L).forEach(
+            it->{System.out.println(it.toText());}
+        );
 
         // itemQueryRepository.selectAll().forEach(System.out::println);
         // itemOnlyRepository.findAll().forEach(System.out::println);

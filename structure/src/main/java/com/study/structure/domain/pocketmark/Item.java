@@ -38,15 +38,15 @@ import lombok.ToString;
 @ToString(callSuper = true)
 // @Customizer(ItemCustomizer.class)
 // @Polymorphism(type = PolymorphismType.EXPLICIT)
-public abstract class Item extends BaseEntityWithId implements Serializable {
+public class Item extends BaseEntityWithId{
     
 
-    protected Long itemId; //FolderId & BookmarkId
-    protected String name;
-    protected Long parentId;
-    protected BigDecimal visitCount;
-    // protected String tag;
-    protected Long userId;
+    public Long itemId; //FolderId & BookmarkId
+    public String name;
+    public Long parentId;
+    public BigDecimal visitCount;
+    // public String tag;
+    public Long userId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", cascade = CascadeType.ALL)
     @ToString.Exclude

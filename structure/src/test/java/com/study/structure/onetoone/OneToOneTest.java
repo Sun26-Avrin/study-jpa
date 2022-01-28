@@ -35,7 +35,7 @@ public class OneToOneTest {
         em.flush(); em.clear();
 
         carReposiotry.findAll().forEach(System.out::println);
-        
+        // carReposiotry.findByMainEngine(mainEngine);
 
     }
 }
