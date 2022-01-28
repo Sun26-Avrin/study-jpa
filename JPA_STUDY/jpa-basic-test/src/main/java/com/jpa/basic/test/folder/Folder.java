@@ -37,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-@ToString(callSuper = true)
+@ToString(callSuper = false)
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "deleted = false")
 @Slf4j

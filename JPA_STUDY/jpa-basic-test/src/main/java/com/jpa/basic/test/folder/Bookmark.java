@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Entity
 @Getter
-@ToString(callSuper = true)
+@ToString(callSuper = false)
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "deleted = false")
 @Slf4j

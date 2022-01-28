@@ -1,10 +1,13 @@
 package com.jpa.basic.test.multi;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,11 +30,15 @@ public class Parent implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     Long id;
 
+    // @Column(name="item_id")
     Long no;
 
     String parentItem;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     @ToString.Exclude
-    List<Child> children; 
+    List<Child> children;
+    
+
+    
 }

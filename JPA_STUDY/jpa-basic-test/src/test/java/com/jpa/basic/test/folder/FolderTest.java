@@ -60,7 +60,10 @@ public class FolderTest {
         em.clear();
 
         System.out.println("1 1 - T @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        treeRepository.findAll().forEach(System.out::println);
+        // treeRepository.findAll().forEach(System.out::println);
+        for (TreeItem a  :treeRepository.findAll()){
+            System.out.println(a);
+        }
         // System.out.println("2 2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         // TreeItem treeItem = folderRepository.findByFolderIdAndUserId(0L,1L);
         // System.out.println(treeItem);
