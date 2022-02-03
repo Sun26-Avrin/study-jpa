@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.study.structure.domain.composite.cBook.cBookPk;
+
+import org.springframework.data.domain.Persistable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,26 +27,42 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @IdClass(cBookPk.class)
-@Table(indexes = @Index(name="c_book_idx", columnList = "idx"))
-public class cBook {
+public class cBook2 implements Persistable<cBookPk>{
     @Id private String author;
     @Id private String name;
+
+    @Transient
+    private boolean isNew=true;
+
+
+    @Override
+    public cBookPk getId() {
+        return new cBookPk(this.name, this.author);
+    }
+
+    @Override
+    public boolean isNew() {
+        // TODO Auto-generated method stub
+        return this.isNew;
+    }
+
+    public void setIsNew(boolean isNew){
+        this.isNew=isNew;
+    }
+
+
+
+
     private String detail;
     private Integer idx;
 
-    public cBook(cBookPk pk){
+    public cBook2(cBookPk pk){
         this.author = pk.getAuthor();
         this.name= pk.getName();
     }
 
+    
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @EqualsAndHashCode
-    @Getter
-    public static class cBookPk implements Serializable{
-        private String name;
-        private String author;
-         
-    }
+
+    
 }

@@ -11,10 +11,11 @@ import javax.persistence.EntityManager;
 import com.study.structure.config.JpaConfig;
 import com.study.structure.domain.composite.Book;
 import com.study.structure.domain.composite.cBook;
-import com.study.structure.domain.composite.cBook.CompId;
+import com.study.structure.domain.composite.cBook.cBookPk;
 import com.study.structure.domain.composite.repository.BookRepository;
 import com.study.structure.domain.composite.repository.cBookRepository;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -36,6 +37,12 @@ public class compositeKeyTest {
 
     }
 
+    
+
+
+
+
+    @DisplayName("ActiveProfiles 디폴트값으로 변경 후, 실제 날라가는 쿼리확인")
     @Test
     void showQuery(){
         List<Book> books = new ArrayList<>();
@@ -78,7 +85,7 @@ public class compositeKeyTest {
         cBookRepository.findByAuthorAndName("Sun","레프트오버");
         em.flush(); em.clear();
         
-        CompId pk = new CompId("Sun", "레프트오버");
+        cBookPk pk = new cBookPk("Sun", "레프트오버");
         em.find(cBook.class, pk);
         em.flush(); em.clear();
 
@@ -95,6 +102,7 @@ public class compositeKeyTest {
     }
 
 
+    @DisplayName("30만개 데이터로 20회 평균측정 - PK 조회, 인덱스조회, 데이터삽입시 정렬")
     @Test
     void test(){
 
@@ -173,7 +181,7 @@ public class compositeKeyTest {
             //5
             startTime= System.currentTimeMillis();
             //엔티티 필드 ID순서(테이블필드순서)랑 복합키클래스이 필드순서가 일치해야 인덱스를 탄다.......................;;;;;; 
-            CompId pk = new CompId("레프트오버10","Sun");
+            cBookPk pk = new cBookPk("레프트오버10","Sun");
             em.find(cBook.class, pk);
             endTime= System.currentTimeMillis();
             result = endTime-startTime;
@@ -271,10 +279,7 @@ public class compositeKeyTest {
         System.out.println("#13 CompositeBook.findByIdx >>> : " + (results.poll()));
 
         System.out.println("Queue Size : "+ results.size());
-
-
-
-
-
     }
+
+    
 }
