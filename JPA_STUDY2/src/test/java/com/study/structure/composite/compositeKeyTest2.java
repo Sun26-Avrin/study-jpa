@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
 @Import(JpaConfig.class)
@@ -37,6 +38,15 @@ public class compositeKeyTest2 {
     void persistanceSolveTest(){
         cBook2 book = new cBook2(new cBookPk("책 이름","작가 이름"));
         cBook2Repository.save(book);
+        em.flush(); em.clear();
+    }
+
+    @DisplayName("readOnly는 영속성을 저장하지 않는다. 그럴때 isNew 로직이 발동할까? 발동하네...")
+    @Test 
+    @Transactional(readOnly = true)
+    void persistanceCheckTest2(){
+        cBook book= new cBook(new cBookPk("책 이름","작가 이름"));
+        cBookRepository.save(book);
         em.flush(); em.clear();
     }
 }
